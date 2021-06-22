@@ -31,7 +31,7 @@ Node insertion and placement can be done with either
 node placement )
 * Circlic insertion ( places nodes in a circle which cannot have conflicts - default project insertion algorithm)
 
-#Run
+# Run
 Running the default project Run file will create a screen showing nodes with connections and all the other required 
 information, also shows the result path in red, BUT you can use models and algorithm package
 and run it as you wish!
