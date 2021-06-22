@@ -1,0 +1,133 @@
+[debug] > Exec(early(addDefaultCommands), None, None)
+[debug] > Exec(addDefaultCommands, None, None)
+[debug] > Exec(early(initialize), None, None)
+[debug] > Exec(initialize, None, None)
+[debug] > Exec(boot, None, None)
+[debug] > Exec(writeSbtVersion, None, None)
+[debug] > Exec(reload, None, None)
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(onFailure loadFailed, None, None)
+[debug] > Exec(loadp, None, None)
+[info] welcome to sbt 1.5.4 (Private Build Java 1.8.0_292)
+[debug]       Load.loadUnit: plugins took 161.509123ms
+[debug]       Load.loadUnit: defsScala took 0.708685ms
+[debug] [Loading] Scanning directory /home/aminmalekloo/.sbt/1.0/plugins
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /home/aminmalekloo/.sbt/1.0/plugins, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 30.055166 ms
+[debug]           Load.resolveProject(global-plugins) took 77.154082ms
+[debug]         Load.loadTransitive: finalizeProject(Project(id global-plugins, base: /home/aminmalekloo/.sbt/1.0/plugins, plugins: List(<none>))) took 286.738949ms
+[debug] [Loading] Done in /home/aminmalekloo/.sbt/1.0/plugins, returning: (global-plugins)
+[debug]       Load.loadUnit: loadedProjectsRaw took 325.748356ms
+[debug]       Load.loadUnit: cleanEvalClasses took 0.500454ms
+[debug]     Load.loadUnit(file:/home/aminmalekloo/.sbt/1.0/plugins/, ...) took 506.512181ms
+[debug]   Load.apply: load took 745.337209ms
+[debug]   Load.apply: resolveProjects took 7.676355ms
+[debug]   Load.apply: finalTransforms took 72.027283ms
+[debug]   Load.apply: config.delegates took 10.924998ms
+[debug]   Load.apply: Def.make(settings)... took 712.355059ms
+[debug]   Load.apply: structureIndex took 145.526713ms
+[debug]   Load.apply: mkStreams took 2.137257ms
+[info] loading global plugins from /home/aminmalekloo/.sbt/1.0/plugins
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug] Load.defaultLoad until apply took 3662.914599ms
+[debug]           Load.loadUnit: plugins took 17.805217ms
+[debug]           Load.loadUnit: defsScala took 0.007212ms
+[debug] [Loading] Scanning directory /home/aminmalekloo/Desktop/A-star/project
+[debug]             Load.loadUnit: mkEval took 10.609477ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /home/aminmalekloo/Desktop/A-star/project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 7.378725 ms
+[info] loading settings for project a-star-build from plugins.sbt ...
+[debug]               Load.resolveProject(a-star-build) took 7.4603ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id a-star-build, base: /home/aminmalekloo/Desktop/A-star/project, plugins: List(<none>))) took 15.77373ms
+[debug] [Loading] Done in /home/aminmalekloo/Desktop/A-star/project, returning: (a-star-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 200.201564ms
+[debug]           Load.loadUnit: cleanEvalClasses took 6.226171ms
+[debug]         Load.loadUnit(file:/home/aminmalekloo/Desktop/A-star/project/, ...) took 227.396928ms
+[debug]       Load.apply: load took 229.899957ms
+[debug]       Load.apply: resolveProjects took 0.208081ms
+[debug]       Load.apply: finalTransforms took 14.861833ms
+[debug]       Load.apply: config.delegates took 0.636654ms
+[debug]       Load.apply: Def.make(settings)... took 152.681737ms
+[debug]       Load.apply: structureIndex took 37.053444ms
+[debug]       Load.apply: mkStreams took 0.003643ms
+[info] loading project definition from /home/aminmalekloo/Desktop/A-star/project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug]     Load.loadUnit: plugins took 718.034811ms
+[debug]     Load.loadUnit: defsScala took 0.006158ms
+[debug] [Loading] Scanning directory /home/aminmalekloo/Desktop/A-star
+[debug]       Load.loadUnit: mkEval took 0.264218ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in /home/aminmalekloo/Desktop/A-star, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))
+[debug] Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbtide.ConfigPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))
+[debug] Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))
+[debug] Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))
+[debug] Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 2.899786 ms
+[info] loading settings for project a-star from build.sbt ...
+[debug]         Load.resolveProject(a-star) took 2.018031ms
+[debug]       Load.loadTransitive: finalizeProject(Project(id a-star, base: /home/aminmalekloo/Desktop/A-star, plugins: List(<none>))) took 5.749337ms
+[debug] [Loading] Done in /home/aminmalekloo/Desktop/A-star, returning: (a-star)
+[debug]     Load.loadUnit: loadedProjectsRaw took 4757.070123ms
+[debug]     Load.loadUnit: cleanEvalClasses took 5.323276ms
+[debug]   Load.loadUnit(file:/home/aminmalekloo/Desktop/A-star/, ...) took 5481.437931ms
+[debug] Load.apply: load took 5482.944805ms
+[debug] Load.apply: resolveProjects took 0.152509ms
+[debug] Load.apply: finalTransforms took 10.536843ms
+[debug] Load.apply: config.delegates took 0.486872ms
+[debug] Load.apply: Def.make(settings)... took 152.9924ms
+[debug] Load.apply: structureIndex took 40.707333ms
+[debug] Load.apply: mkStreams took 0.003142ms
+[info] set current project to A-star (in build file:/home/aminmalekloo/Desktop/A-star/)
+[warn] there's a key that's not used by any other settings/tasks:
+[warn]  
+[warn] * a-star / idePackagePrefix
+[warn]   +- /home/aminmalekloo/Desktop/A-star/build.sbt:7
+[warn]  
+[warn] note: a setting might still be used by a command; to exclude a key from this `lintUnused` check
+[warn] either append it to `Global / excludeLintKeys` or call .withRank(KeyRanks.Invisible) on the key
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(notifyUsersAboutShell, None, None)
+[debug] > Exec(iflast shell, None, None)
+[debug] > Exec(shell, None, None)
+[info] sbt server started at local:///home/aminmalekloo/.sbt/1.0/server/489a33e0a0a393db2f4b/sock
+[debug] Writing bsp connection file
+[info] started sbt server
