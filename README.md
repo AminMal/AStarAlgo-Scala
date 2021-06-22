@@ -1,4 +1,4 @@
-##A* algorithm visualized in Scala
+## A* algorithm visualized in Scala
 
 This project runs the A* algorithm on a graph, based on the given nodes and connections, weather given as input file
 with the accepted syntax (which are further shown) or instantiated manually.
