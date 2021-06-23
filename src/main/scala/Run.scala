@@ -15,229 +15,57 @@ import scala.util.Random
 
 object Run extends JFXApp {
 
-  /**
-   *
-   * @param n number of nodes, so we can give sorting and insertion solutions based on number of nodes
-   * @return List of all the solutions for n nodes on the screen
-   */
-  def nQueens(n: Int): List[List[Int]] = {
-    def hasConflict(position: Int, queens: List[Int]): Boolean = {
-      def hasConflictForSingleQueen(position: Int, queen: Int, index: Int): Boolean =
-        queen == position || (index + 1) == (queen - position) || (index + 1) == (position - queen)
+  import insertion_algorithms.CircleInsertion._
 
-      queens.zipWithIndex.exists { pair =>
-        val (queen, index) = pair
-        hasConflictForSingleQueen(position, queen, index)
-      }
+  implicit class ListSwapper[T](list: List[T]) {
+    /**
+     *
+     * @param firstIndex one of the indexes you want to swap, doesn't matter if is smaller or bigger than the other
+     * @param secondIndex the other index to swap
+     * @return same list, but swapped elements
+     * @throws IndexOutOfBoundsException in case indexes are out of list bound
+     */
+    def swap(firstIndex: Int, secondIndex: Int): List[T] = {
+      val lowerIndex = Math.min(firstIndex, secondIndex)
+      val higherIndex = Math.max(firstIndex, secondIndex)
+      val middleSlice: List[T] = list.slice(lowerIndex + 1, higherIndex)
+      val firstSlice: List[T] = list.slice(0, lowerIndex)
+      val secondSlice: List[T] = list.takeRight(list.length - (higherIndex + 1))
+      val firstElem: T = list(lowerIndex)
+      val secondElem: T = list(higherIndex)
+      (firstSlice :+ secondElem) ++ middleSlice ++ (firstElem +: secondSlice)
     }
+
+    /**
+     * Swaps n random elements, for example List(1, 2, 3, 4, 5, 6, 7, 8)
+     * getting swapped 2 times with randomly chosen indexes could convert to:
+     * List(2, 1, 3, 6, 5, 4, 7, 8) where 1 and 2, and 4 an 6 are swapped
+     * @param n number of random swaps
+     * @return same list, but swapped n random elements randomly
+     */
 
     @tailrec
-    def nQueensTailrec(currentPosition: Int,
-                       currentQueens: List[Int] = List(),
-                       solutions: List[List[Int]] = List()): List[List[Int]] = {
-      if (currentPosition >= n && currentQueens.isEmpty) solutions
-      else if (currentPosition >= n) {
-        nQueensTailrec(currentQueens.head + 1, currentQueens.tail, solutions)
-      } else if (hasConflict(currentPosition, currentQueens)) {
-        nQueensTailrec(currentPosition + 1, currentQueens, solutions)
-      } else if (currentQueens.length == n - 1) {
-        val newSolution = currentPosition :: currentQueens
-        nQueensTailrec(currentPosition + 1, currentQueens, newSolution :: solutions)
-      } else nQueensTailrec(0, currentPosition :: currentQueens, solutions)
-    }
-
-    nQueensTailrec(0)
-  }
-
-  /**
-   *
-   * @param list the input list you want to swap your elements from
-   * @param firstIndex one of the indexes you want to swap, doesn't matter if is smaller or bigger than the other
-   * @param secondIndex the other index to swap
-   * @tparam T type of list elements
-   * @return same list, but swapped elements
-   * @throws IndexOutOfBoundsException in case indexes are out of list bound
-   */
-  def swap[T](list: List[T], firstIndex: Int, secondIndex: Int): List[T] = {
-    val lowerIndex = Math.min(firstIndex, secondIndex)
-    val higherIndex = Math.max(firstIndex, secondIndex)
-    val middleSlice: List[T] = list.slice(lowerIndex + 1, higherIndex)
-    val firstSlice: List[T] = list.slice(0, lowerIndex)
-    val secondSlice: List[T] = list.takeRight(list.length - (higherIndex + 1))
-    val firstElem: T = list(lowerIndex)
-    val secondElem: T = list(higherIndex)
-    (firstSlice :+ secondElem) ++ middleSlice ++ (firstElem +: secondSlice)
-  }
-
-  /**
-   * Swaps n random elements, for example List(1, 2, 3, 4, 5, 6, 7, 8)
-   * getting swapped 2 times with randomly chosen indexes could convert to:
-   * List(2, 1, 3, 6, 5, 4, 7, 8) where 1 and 2, and 4 an 6 are swapped
-   * @param list input list to randomize
-   * @param n number of random swaps
-   * @tparam T list's values type
-   * @return same list, but swapped n random elements randomly
-   */
-  @tailrec
-  def swapNRandomElementsIn[T](list: List[T], n: Int): List[T] = {
-    val listLength = list.length
-    if (n <= 0) list
-    else {
-      val from = Random.nextInt(listLength)
-      var to = Random.nextInt(listLength)
-      while(to == from) {
-        to = Random.nextInt(listLength)
+    final def swapElementsNRandomTimes(n: Int): List[T] = {
+      val listLength = list.length
+      if (n <= 0) list
+      else {
+        val from = Random.nextInt(listLength)
+        var to = Random.nextInt(listLength)
+        while(to == from) {
+          to = Random.nextInt(listLength)
+        }
+        val swapped = list.swap(from, to)
+        swapped.swapElementsNRandomTimes(n - 1)
       }
-      val swapped = swap(list, from, to)
-      swapNRandomElementsIn(swapped, n - 1)
-    }
-  }
-
-  /**
-   * Synchronizes all the components (circle, name and heuristic) based on given x and y for circle center
-   * @param component combination of the node circle, node name and node heuristic
-   * @param x x axis location for circle center
-   * @param y y axis location for circle center
-   * @return same components, but synchronized locations
-   */
-  def syncLocations(component: (Circle, Text, Text), x: Double, y: Double): (Circle, Text, Text) = {
-    val circle = component._1
-    val name = component._2
-    val heuristic = component._3
-
-    circle.setCenterX(x)
-    circle.setCenterX(y)
-    name.setX(circle.delegate.getCenterX - 5)
-    name.setY(circle.delegate.getCenterY + 5)
-    heuristic.setX(circle.delegate.getCenterX - 6)
-    heuristic.setY(circle.delegate.getCenterY - 25)
-
-    val rc = Circle(centerX = x, centerY = y, radius = 20, fill = Color.Grey)
-    val t = new Text(x - 5, y + 5, name.delegate.getText)
-    val h = new Text(x - 6, y - 25, heuristic.delegate.getText)
-    t.setFill(name.delegate.getFill)
-    t.setBoundsType(TextBoundsType.Visual)
-    h.setFill(heuristic.delegate.getFill)
-    h.setBoundsType(TextBoundsType.Visual)
-    (rc, t, h)
-  }
-
-  /**
-   * Arranges nodes on scree using nQueens random algorithm
-   * @param components all the node circles, names and heuristics
-   * @param width maximum width to place nodes on
-   * @param height maximum height to place nodes on
-   *               For example, your screen is 1200 x 800 but you want to place nodes
-   *               in a maximum 800 x 600 area
-   * @param basedOnSolution The randomly chosen given nQueens solution
-   *                        For example, nQueens gives you 12 solutions,
-   *                        One of them is chosen (either randomly or on intend)
-   * @return components, arranged on screen
-   */
-  def arrangeComponentsOnScreen(
-                                 components: List[(Circle, Text, Text)],
-                                 width: Int,
-                                 height: Int,
-                                 basedOnSolution: List[Int]): List[(Circle, Text, Text)] = {
-    val numberOfComponents = components.length
-    val eachNodeWidthOffset = width / numberOfComponents
-    val eachNodeHeightOffset = height / numberOfComponents
-
-    def getX(index: Int, xOffset: Int = eachNodeWidthOffset): Double = {
-      (index * xOffset) + (xOffset / 2)
-    }
-
-    def getY(index: Int, yOffset: Int = eachNodeHeightOffset): Double = {
-      50 + (index * yOffset) + (yOffset / 2)
-    }
-
-    components.zipWithIndex.map { pair =>
-      val (component, xIndex) = pair
-      val xLocation = getX(xIndex)
-      val yLocation = getY(basedOnSolution(xIndex))
-      syncLocations(component, xLocation, yLocation)
     }
 
   }
 
-  // End of nQueens-ish algorithms and placements
+  val homeDirectory: String = System.getenv("HOME")
 
-  /**
-   * Given all the components, returns circle center location for a given node name
-   * @param components nodes (circles, names, heuristics)
-   * @param nodeName the name you want to find locations for
-   * @return x and y location of that node, IF exists (Optional)
-   */
-  def findNodeLocationInComponents(
-                                  components: List[(Circle, Text, Text)],
-                                  nodeName: String
-                                  ): Option[(Double, Double)] = {
-    components.map(p => (p._1, p._2.delegate.getText))
-      .find(circleAndText => circleAndText._2 == nodeName).map { existingNode =>
-      (existingNode._1.delegate.getCenterX, existingNode._1.delegate.getCenterY)
-    }
-  }
+  val nodes: List[Node] = Node.fromFile(homeDirectory + "/Desktop/Projects/AStarNodesInfo/nodes.nodeInfo")
 
-  /**
-   * returns x and y location of index-th node of the components
-   * @param index index of the node
-   * @param radius radius of the circle to be shown on the screen
-   * @param circleCenterX circle that nodes are going to be placed on x location
-   * @param circleCenterY circle that nodes are going to be placed on y location
-   * @param totalNodesCount total number of nodes in components to be placed on the circle
-   * @return x and y location to insert node on
-   */
-    def calculateNodeLocationOnCircle(index: Int,
-                                      radius: Double,
-                                      circleCenterX: Double,
-                                      circleCenterY: Double,
-                                      totalNodesCount: Int): (Double, Double) = {
-      val unitAngle = 360.0 / totalNodesCount
-      val thisNodeAngle: Double = unitAngle * index
-      val returningX = circleCenterX + (Math.cos(Math.toRadians(thisNodeAngle)) * radius)
-      val returningY = circleCenterY + (Math.sin(Math.toRadians(thisNodeAngle)) * radius)
-      (returningX, returningY)
-    }
-
-  /**
-   * components placed in the right screen location
-   * @param components all the components to be placed (node circles, names and heuristics)
-   * @param screenCenterX circle to place nodes on, x location
-   * @param screenCenterY circle to place nodes on, y location
-   * @return all the components, placed in the right location
-   */
-  def arrangeComponentsOnCircle(
-                               components: List[(Circle, Text, Text)],
-                               screenCenterX: Double,
-                               screenCenterY: Double
-                               ): List[(Circle, Text, Text)] = {
-    val totalNodesCount = components.length
-    val componentsAndRelatedLocations = components.zipWithIndex.map { pair =>
-      val (component, index) = pair
-      (component, calculateNodeLocationOnCircle(index, radius = 275, screenCenterX, screenCenterY, totalNodesCount = totalNodesCount))
-    }
-
-    componentsAndRelatedLocations.map { pair =>
-      val (component, relatedLocation) = pair
-      val (xLocation, yLocation) = relatedLocation
-      val circleToReturn = Circle(centerX = xLocation, centerY = yLocation, radius = 20.0)
-      circleToReturn.setFill(component._1.delegate.getFill)
-      circleToReturn.setViewOrder(-1)
-      val nameToReturn = new Text(xLocation - 5, yLocation + 5, component._2.getText)
-      nameToReturn.setFill(component._2.delegate.getFill)
-      nameToReturn.setViewOrder(-2)
-      val heuristicToReturn = new Text(xLocation - 6, yLocation - 25, component._3.delegate.getText)
-      heuristicToReturn.setFill(component._3.delegate.getFill)
-      heuristicToReturn.setViewOrder(-2)
-      (circleToReturn, nameToReturn, heuristicToReturn)
-    }
-  }
-
-  val homeDirectory = System.getenv("HOME")
-
-  val nodes: List[Node] = Node.fromFile(homeDirectory + "/Desktop/nodes.nodeInfo")
-
-  val connectionsInfo: List[ConnectionInfo] = ConnectionInfo.fromFile(homeDirectory + "/Desktop/graph.connectionInfo")
+  val connectionsInfo: List[ConnectionInfo] = ConnectionInfo.fromFile(homeDirectory + "/Desktop/Projects/AStarNodesInfo/graph.connectionInfo")
 
   val graph: Graph = models.Graph(nodes, connectionsInfo)
 
@@ -274,7 +102,7 @@ object Run extends JFXApp {
     }
 
     val listLength: Int = initial.length
-    val randomizedNodes: List[(Circle, Text, Text)] = swapNRandomElementsIn(initial, Math.sqrt(listLength -1).round.toInt)
+    val randomizedNodes: List[(Circle, Text, Text)] = initial.swapElementsNRandomTimes(Math.sqrt(listLength -1).round.toInt)
 
     // if nQueens approach was wanted, this would've been the bomb!
 //    val allSolutions: List[List[Int]] = nQueens(listLength)
