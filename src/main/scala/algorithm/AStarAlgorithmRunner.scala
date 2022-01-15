@@ -7,7 +7,7 @@ import scala.annotation.tailrec
 
 sealed case class AStarAlgorithmRunner(from: Option[String], to: Option[String], graph: Graph) {
 
-  object MyOrdering extends Ordering[(String, Long)] {
+  object NodeSelectionOrdering extends Ordering[(String, Long)] {
     override def compare(x: (String, Long), y: (String, Long)): Int = x._2 compare y._2
   }
 
@@ -38,7 +38,7 @@ sealed case class AStarAlgorithmRunner(from: Option[String], to: Option[String],
     }
     println(s"First choice is:\nstarting from $lastNode which one should we choose? ")
     println(a.mkString("" ," or ", "?"))
-    val minimumPathSelection = a.min(MyOrdering)
+    val minimumPathSelection = a.min(NodeSelectionOrdering)
     println(s"Of course $minimumPathSelection")
     if (minimumPathSelection._1 == to.get) {
       path.appended(minimumPathSelection._1)
@@ -66,7 +66,7 @@ sealed case class AStarAlgorithmRunner(from: Option[String], to: Option[String],
         (destination.name, weight)
       }
     }
-    val minimumWeightedDestination = a.min(MyOrdering)
+    val minimumWeightedDestination = a.min(NodeSelectionOrdering)
     if (minimumWeightedDestination._1 == to.get) {
       path.appended(minimumWeightedDestination._1)
     } else {
